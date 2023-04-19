@@ -39,6 +39,28 @@ const maxHum = data.sort((a, b) => b.Humidity - a.Humidity)[0].Humidity;
 
 console.log(`Humidity: Min: ${minHum}, Max: ${maxHum}`);
 
-//console.log(data);
+const maxTempDay = data.sort((a, b) => b.Max_Temperature - a.Max_Temperature)[0];
+
+console.log(`HottestDay: ${maxTempDay.Date} ${maxTempDay.City}`)
+
+const citiesGroupData = data
+  .reduce((acc, obj) => {
+    if (acc[obj.City]) {
+      acc[obj.City].dayCounter += 1;
+      acc[obj.City].tempSum += Number(obj.Max_Temperature);
+    } else {
+      acc[obj.City] = { dayCounter: 1, tempSum: Number(obj.Max_Temperature) }
+    }
+    return acc;
+  }, {});
+
+let avgTempByCities = [];
+for (const city in citiesGroupData) {
+  const avg = citiesGroupData[city].tempSum / citiesGroupData[city].dayCounter;
+  avgTempByCities.push({ city, avg })
+}
+const hottestCity = avgTempByCities.sort((a, b) => b.avg - a.avg)[0];
+//console.log(avgTempByCities);
+console.log(`HottestCity: ${hottestCity.city}`);
   // END
 }
