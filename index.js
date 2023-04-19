@@ -34,6 +34,11 @@ const cities = _.uniq(
 
 console.log(`Cities: ${cities}`);
 
+const minHum = data.sort((a, b) => a.Humidity - b.Humidity)[0].Humidity;
+const maxHum = data.sort((a, b) => b.Humidity - a.Humidity)[0].Humidity;
+
+console.log(`Humidity: Min: ${minHum}, Max: ${maxHum}`);
+
 //console.log(data);
   // END
 }
