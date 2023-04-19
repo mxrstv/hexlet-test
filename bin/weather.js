@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 import fs from 'fs';
